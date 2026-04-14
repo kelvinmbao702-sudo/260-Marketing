@@ -1,0 +1,1765 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>BS 260 – Principles of Marketing Study Guide</title>
+<link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=DM+Sans:ital,wght@0,300;0,400;0,600;0,700;1,300&family=DM+Mono:wght@400;500&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --ink: #0d0d0d;
+    --paper: #f5f0e8;
+    --accent: #e63312;
+    --accent2: #f59e0b;
+    --accent3: #1d6b3b;
+    --accent4: #1e40af;
+    --muted: #6b6b6b;
+    --card: #ffffff;
+    --border: #d4cfc4;
+  }
+
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+
+  body {
+    font-family: 'DM Sans', sans-serif;
+    background: var(--paper);
+    color: var(--ink);
+    min-height: 100vh;
+  }
+
+  /* ── HERO ── */
+  .hero {
+    background: var(--ink);
+    color: var(--paper);
+    padding: 60px 40px 50px;
+    position: relative;
+    overflow: hidden;
+  }
+  .hero::before {
+    content: '';
+    position: absolute;
+    top: -60px; right: -60px;
+    width: 320px; height: 320px;
+    border-radius: 50%;
+    border: 3px solid var(--accent);
+    opacity: .15;
+  }
+  .hero::after {
+    content: '';
+    position: absolute;
+    bottom: -80px; left: 30%;
+    width: 200px; height: 200px;
+    border-radius: 50%;
+    background: var(--accent2);
+    opacity: .06;
+  }
+  .hero-tag {
+    font-family: 'DM Mono', monospace;
+    font-size: 11px;
+    letter-spacing: 3px;
+    text-transform: uppercase;
+    color: var(--accent);
+    margin-bottom: 12px;
+  }
+  .hero h1 {
+    font-family: 'Bebas Neue', sans-serif;
+    font-size: clamp(48px, 8vw, 90px);
+    line-height: .95;
+    margin-bottom: 16px;
+    letter-spacing: 1px;
+  }
+  .hero h1 span { color: var(--accent); }
+  .hero-sub {
+    font-size: 15px;
+    color: #aaa;
+    max-width: 480px;
+    line-height: 1.6;
+  }
+  .hero-meta {
+    margin-top: 28px;
+    display: flex;
+    gap: 24px;
+    flex-wrap: wrap;
+  }
+  .meta-pill {
+    background: rgba(255,255,255,.08);
+    border: 1px solid rgba(255,255,255,.15);
+    border-radius: 100px;
+    padding: 6px 16px;
+    font-size: 12px;
+    font-weight: 600;
+    letter-spacing: .5px;
+  }
+
+  /* ── NAV TABS ── */
+  .tab-bar {
+    background: var(--ink);
+    display: flex;
+    gap: 0;
+    overflow-x: auto;
+    border-top: 1px solid rgba(255,255,255,.08);
+    padding: 0 40px;
+    scrollbar-width: none;
+  }
+  .tab-bar::-webkit-scrollbar { display: none; }
+  .tab {
+    padding: 14px 22px;
+    font-size: 12px;
+    font-weight: 700;
+    letter-spacing: 1px;
+    text-transform: uppercase;
+    color: #777;
+    cursor: pointer;
+    white-space: nowrap;
+    border-bottom: 3px solid transparent;
+    transition: all .2s;
+    font-family: 'DM Mono', monospace;
+  }
+  .tab:hover { color: var(--paper); }
+  .tab.active { color: var(--accent); border-bottom-color: var(--accent); }
+
+  /* ── MAIN LAYOUT ── */
+  main {
+    max-width: 1100px;
+    margin: 0 auto;
+    padding: 40px 24px 80px;
+  }
+
+  /* ── SECTION PANELS ── */
+  .section-panel { display: none; }
+  .section-panel.active { display: block; }
+
+  /* ── TOPIC CARD ── */
+  .topic-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+    gap: 24px;
+    margin-bottom: 48px;
+  }
+
+  .topic-card {
+    background: var(--card);
+    border: 1.5px solid var(--border);
+    border-radius: 16px;
+    padding: 28px;
+    position: relative;
+    overflow: hidden;
+    transition: transform .2s, box-shadow .2s;
+  }
+  .topic-card:hover {
+    transform: translateY(-4px);
+    box-shadow: 0 16px 40px rgba(0,0,0,.1);
+  }
+  .topic-card::before {
+    content: '';
+    position: absolute;
+    top: 0; left: 0; right: 0;
+    height: 4px;
+    background: var(--card-accent, var(--accent));
+  }
+  .card-num {
+    font-family: 'Bebas Neue', sans-serif;
+    font-size: 52px;
+    line-height: 1;
+    color: var(--card-accent, var(--accent));
+    opacity: .15;
+    position: absolute;
+    top: 16px; right: 20px;
+  }
+  .card-label {
+    font-family: 'DM Mono', monospace;
+    font-size: 10px;
+    letter-spacing: 2px;
+    text-transform: uppercase;
+    color: var(--card-accent, var(--accent));
+    margin-bottom: 8px;
+  }
+  .card-title {
+    font-family: 'Bebas Neue', sans-serif;
+    font-size: 24px;
+    letter-spacing: .5px;
+    margin-bottom: 14px;
+    line-height: 1.2;
+  }
+  .card-points {
+    list-style: none;
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+  }
+  .card-points li {
+    font-size: 13px;
+    line-height: 1.5;
+    color: #333;
+    padding-left: 16px;
+    position: relative;
+  }
+  .card-points li::before {
+    content: '→';
+    position: absolute;
+    left: 0;
+    color: var(--card-accent, var(--accent));
+    font-size: 11px;
+  }
+
+  /* ── KEY CONCEPTS BADGES ── */
+  .concepts-row {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 10px;
+    margin-bottom: 32px;
+  }
+  .badge {
+    background: var(--ink);
+    color: var(--paper);
+    border-radius: 8px;
+    padding: 8px 14px;
+    font-size: 12px;
+    font-weight: 600;
+    letter-spacing: .3px;
+  }
+  .badge.red { background: var(--accent); }
+  .badge.amber { background: var(--accent2); color: var(--ink); }
+  .badge.green { background: var(--accent3); }
+  .badge.blue { background: var(--accent4); }
+
+  /* ── SECTION TITLE ── */
+  .section-title {
+    font-family: 'Bebas Neue', sans-serif;
+    font-size: 38px;
+    letter-spacing: 1px;
+    margin-bottom: 8px;
+  }
+  .section-desc {
+    font-size: 14px;
+    color: var(--muted);
+    margin-bottom: 32px;
+    max-width: 600px;
+    line-height: 1.6;
+  }
+  .divider {
+    height: 2px;
+    background: linear-gradient(90deg, var(--accent) 0%, transparent 100%);
+    margin-bottom: 36px;
+    border-radius: 2px;
+  }
+
+  /* ── FLOW DIAGRAM ── */
+  .flow {
+    display: flex;
+    align-items: center;
+    gap: 0;
+    flex-wrap: wrap;
+    margin-bottom: 40px;
+  }
+  .flow-step {
+    background: var(--card);
+    border: 1.5px solid var(--border);
+    border-radius: 12px;
+    padding: 16px 20px;
+    text-align: center;
+    min-width: 130px;
+    flex: 1;
+  }
+  .flow-step .step-num {
+    font-family: 'Bebas Neue', sans-serif;
+    font-size: 28px;
+    color: var(--accent);
+    line-height: 1;
+  }
+  .flow-step .step-label {
+    font-size: 11px;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: .5px;
+    margin-top: 4px;
+  }
+  .flow-arrow {
+    font-size: 20px;
+    color: var(--accent);
+    padding: 0 6px;
+    flex-shrink: 0;
+  }
+
+  /* ── 4P TABLE ── */
+  .mix-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 20px;
+    margin-bottom: 40px;
+  }
+  .mix-card {
+    border-radius: 16px;
+    padding: 28px;
+    color: white;
+  }
+  .mix-card h3 {
+    font-family: 'Bebas Neue', sans-serif;
+    font-size: 30px;
+    margin-bottom: 12px;
+  }
+  .mix-card ul { list-style: none; }
+  .mix-card ul li {
+    font-size: 13px;
+    padding: 5px 0;
+    border-bottom: 1px solid rgba(255,255,255,.15);
+    line-height: 1.4;
+  }
+  .mix-card ul li:last-child { border-bottom: none; }
+  .mc-red { background: var(--accent); }
+  .mc-amber { background: #d97706; }
+  .mc-green { background: var(--accent3); }
+  .mc-blue { background: var(--accent4); }
+
+  /* ── Q&A SECTION ── */
+  .qa-item {
+    background: var(--card);
+    border: 1.5px solid var(--border);
+    border-radius: 14px;
+    margin-bottom: 20px;
+    overflow: hidden;
+  }
+  .qa-question {
+    padding: 20px 24px;
+    cursor: pointer;
+    display: flex;
+    align-items: flex-start;
+    gap: 16px;
+    transition: background .15s;
+  }
+  .qa-question:hover { background: #faf8f3; }
+  .qa-q-num {
+    font-family: 'Bebas Neue', sans-serif;
+    font-size: 20px;
+    color: var(--accent);
+    min-width: 32px;
+    line-height: 1;
+    padding-top: 2px;
+  }
+  .qa-q-text {
+    font-weight: 600;
+    font-size: 14px;
+    line-height: 1.5;
+    flex: 1;
+  }
+  .qa-chevron {
+    font-size: 18px;
+    color: var(--muted);
+    transition: transform .2s;
+    margin-left: auto;
+    padding-top: 2px;
+  }
+  .qa-item.open .qa-chevron { transform: rotate(180deg); }
+  .qa-answer {
+    display: none;
+    padding: 0 24px 20px 72px;
+    font-size: 13.5px;
+    line-height: 1.7;
+    color: #333;
+    border-top: 1px solid var(--border);
+    padding-top: 16px;
+  }
+  .qa-item.open .qa-answer { display: block; }
+  .qa-answer strong { color: var(--ink); }
+  .qa-answer ul {
+    margin-top: 8px;
+    padding-left: 18px;
+  }
+  .qa-answer ul li { margin-bottom: 6px; }
+
+  /* ── HIGHLIGHT BOX ── */
+  .highlight-box {
+    background: var(--ink);
+    color: var(--paper);
+    border-radius: 16px;
+    padding: 28px 32px;
+    margin-bottom: 32px;
+  }
+  .highlight-box h3 {
+    font-family: 'Bebas Neue', sans-serif;
+    font-size: 22px;
+    color: var(--accent2);
+    margin-bottom: 12px;
+    letter-spacing: .5px;
+  }
+  .highlight-box p, .highlight-box li {
+    font-size: 13.5px;
+    line-height: 1.7;
+    color: #ccc;
+  }
+  .highlight-box ul { padding-left: 20px; margin-top: 8px; }
+
+  /* ── RESPONSIVE ── */
+  @media (max-width: 600px) {
+    .hero { padding: 40px 20px; }
+    .tab-bar { padding: 0 20px; }
+    main { padding: 28px 16px 60px; }
+    .mix-grid { grid-template-columns: 1fr; }
+    .flow-step { min-width: 90px; }
+  }
+</style>
+</head>
+<body>
+
+<!-- HERO -->
+<div class="hero">
+  <div class="hero-tag">Copperbelt University · School of Business</div>
+  <h1>BS <span>260</span><br>Principles of<br>Marketing</h1>
+  <p class="hero-sub">A complete visual study guide covering all 9 topics — with key concepts, breakdowns, and exam Q&amp;A.</p>
+  <div class="hero-meta">
+    <div class="meta-pill">📚 9 Topics</div>
+    <div class="meta-pill">✅ 40% CA · 60% Exam</div>
+    <div class="meta-pill">👩‍🏫 Mrs B.S. Shambweka</div>
+    <div class="meta-pill">💡 30 Q&amp;A Included</div>
+  </div>
+</div>
+
+<!-- TAB BAR -->
+<div class="tab-bar">
+  <div class="tab active" onclick="showPanel('overview')">Overview</div>
+  <div class="tab" onclick="showPanel('t1')">1 · Intro</div>
+  <div class="tab" onclick="showPanel('t2')">2 · Mgmt</div>
+  <div class="tab" onclick="showPanel('t3')">3 · Product</div>
+  <div class="tab" onclick="showPanel('t4')">4 · Consumer</div>
+  <div class="tab" onclick="showPanel('t6')">6 · Pricing</div>
+  <div class="tab" onclick="showPanel('t7')">7 · Promo</div>
+  <div class="tab" onclick="showPanel('t8')">8 · Sales Force</div>
+  <div class="tab" onclick="showPanel('t9')">9 · Competition</div>
+  <div class="tab" onclick="showPanel('qa')">Q&amp;A ✦</div>
+</div>
+
+<main>
+
+<!-- ═══════════ OVERVIEW ═══════════ -->
+<div id="overview" class="section-panel active">
+  <div class="section-title">Course At A Glance</div>
+  <p class="section-desc">All 9 topics mapped visually. Click any tab above to dive deep into a topic.</p>
+  <div class="divider"></div>
+
+  <div class="highlight-box">
+    <h3>⚡ What Is Marketing?</h3>
+    <p>Marketing is the process of identifying, anticipating, and satisfying customer needs <em>profitably</em>. It is NOT just advertising — it spans product design, pricing, distribution, and communication.</p>
+  </div>
+
+  <div class="topic-grid">
+    <div class="topic-card" style="--card-accent:#e63312">
+      <div class="card-num">1</div>
+      <div class="card-label">Topic 1</div>
+      <div class="card-title">Introduction to Marketing</div>
+      <ul class="card-points">
+        <li>Definitions, Role & Scope</li>
+        <li>Marketing Concepts</li>
+        <li>The 4Ps Mix</li>
+        <li>Evolution of Marketing</li>
+      </ul>
+    </div>
+    <div class="topic-card" style="--card-accent:#d97706">
+      <div class="card-num">2</div>
+      <div class="card-label">Topic 2</div>
+      <div class="card-title">Marketing Management</div>
+      <ul class="card-points">
+        <li>Planning & Organisation</li>
+        <li>Marketing Department Structure</li>
+        <li>Customer Satisfaction & Retention</li>
+        <li>MIS & Marketing Research</li>
+      </ul>
+    </div>
+    <div class="topic-card" style="--card-accent:#1d6b3b">
+      <div class="card-num">3</div>
+      <div class="card-label">Topic 3</div>
+      <div class="card-title">Product Decisions</div>
+      <ul class="card-points">
+        <li>Product Levels & Definitions</li>
+        <li>Product Planning & Development</li>
+        <li>Branding & Brand Equity</li>
+        <li>Packaging & Labelling</li>
+      </ul>
+    </div>
+    <div class="topic-card" style="--card-accent:#1e40af">
+      <div class="card-num">4</div>
+      <div class="card-label">Topic 4</div>
+      <div class="card-title">Consumer Behaviour</div>
+      <ul class="card-points">
+        <li>Social, Cultural, Personal & Psychological Factors</li>
+        <li>Buyer vs Consumer Behaviour</li>
+        <li>Market Segmentation</li>
+        <li>Targeting & Bases of Segmentation</li>
+      </ul>
+    </div>
+    <div class="topic-card" style="--card-accent:#7c3aed">
+      <div class="card-num">6</div>
+      <div class="card-label">Topic 6</div>
+      <div class="card-title">Pricing Strategies</div>
+      <ul class="card-points">
+        <li>Setting Price & Objectives</li>
+        <li>Adapting Prices</li>
+        <li>Initiating & Responding to Price Changes</li>
+      </ul>
+    </div>
+    <div class="topic-card" style="--card-accent:#0e7490">
+      <div class="card-num">7</div>
+      <div class="card-label">Topic 7</div>
+      <div class="card-title">Promotion & Comms Mix</div>
+      <ul class="card-points">
+        <li>Advertising Objectives & Budget</li>
+        <li>Message & Media Decisions</li>
+        <li>Sales Promotion & PR</li>
+        <li>Integrated Marketing Communications</li>
+      </ul>
+    </div>
+    <div class="topic-card" style="--card-accent:#be123c">
+      <div class="card-num">8</div>
+      <div class="card-label">Topic 8</div>
+      <div class="card-title">Managing the Sales Force</div>
+      <ul class="card-points">
+        <li>Objectives, Structure & Size</li>
+        <li>Recruiting Sales Reps</li>
+        <li>Motivating the Sales Force</li>
+        <li>Customer Retention</li>
+      </ul>
+    </div>
+    <div class="topic-card" style="--card-accent:#065f46">
+      <div class="card-num">9</div>
+      <div class="card-label">Topic 9</div>
+      <div class="card-title">Dealing with Competition</div>
+      <ul class="card-points">
+        <li>Industry vs Market Concept</li>
+        <li>Competitive Analysis</li>
+        <li>How Business is Changing</li>
+        <li>Company & Market Responses</li>
+      </ul>
+    </div>
+  </div>
+
+  <!-- 4Ps Mix Visual -->
+  <div class="section-title" style="font-size:28px; margin-bottom:8px;">The Marketing Mix — The 4 Ps</div>
+  <p class="section-desc">Every marketing decision falls into one of these four categories.</p>
+  <div class="mix-grid">
+    <div class="mix-card mc-red">
+      <h3>🏷️ Product</h3>
+      <ul>
+        <li>What you sell — goods, services, ideas</li>
+        <li>Design, quality, features, branding</li>
+        <li>Product lifecycle (intro → growth → maturity → decline)</li>
+        <li>Core, actual & augmented product levels</li>
+      </ul>
+    </div>
+    <div class="mix-card mc-amber">
+      <h3>💰 Price</h3>
+      <ul>
+        <li>What customers pay</li>
+        <li>Objectives: profit, market share, survival</li>
+        <li>Strategies: penetration, skimming, competitive</li>
+        <li>Discounts, allowances, payment terms</li>
+      </ul>
+    </div>
+    <div class="mix-card mc-green">
+      <h3>📣 Promotion</h3>
+      <ul>
+        <li>How you communicate with customers</li>
+        <li>Advertising, PR, sales promotion, personal selling</li>
+        <li>Setting objectives, budget & message</li>
+        <li>Integrated Marketing Communications (IMC)</li>
+      </ul>
+    </div>
+    <div class="mix-card mc-blue">
+      <h3>📦 Place</h3>
+      <ul>
+        <li>How the product reaches the customer</li>
+        <li>Distribution channels & logistics</li>
+        <li>Retail, wholesale, direct, online</li>
+        <li>Channel management & coverage</li>
+      </ul>
+    </div>
+  </div>
+</div>
+
+<!-- ═══════════ TOPIC 1 ═══════════ -->
+<div id="t1" class="section-panel">
+  <div class="section-title">Topic 1 · Introduction to Marketing</div>
+  <p class="section-desc">The foundation of all marketing thinking — definitions, concepts, and the evolution of how businesses approach the market.</p>
+  <div class="divider"></div>
+
+  <div class="highlight-box">
+    <h3>📖 Core Definition</h3>
+    <p><strong style="color:#f5f0e8">Philip Kotler:</strong> Marketing is "a social and managerial process by which individuals and groups obtain what they need and want through creating, offering, and exchanging products of value with others."</p>
+    <p style="margin-top:10px"><strong style="color:#f5f0e8">Simple version:</strong> Finding out what people want → creating it → getting it to them → communicating its value.</p>
+  </div>
+
+  <div class="topic-grid">
+    <div class="topic-card" style="--card-accent:#e63312">
+      <div class="card-label">1.1 Role & Scope</div>
+      <div class="card-title">What Marketing Does</div>
+      <ul class="card-points">
+        <li>Identifies customer needs and wants</li>
+        <li>Creates products/services that satisfy those needs</li>
+        <li>Sets pricing, distribution and promotion</li>
+        <li>Builds long-term customer relationships</li>
+        <li>Generates profit for the organisation</li>
+      </ul>
+    </div>
+    <div class="topic-card" style="--card-accent:#e63312">
+      <div class="card-label">1.2 Marketing Concepts</div>
+      <div class="card-title">5 Management Philosophies</div>
+      <ul class="card-points">
+        <li><strong>Production</strong> – focus on efficiency & availability</li>
+        <li><strong>Product</strong> – focus on quality & features</li>
+        <li><strong>Selling</strong> – focus on aggressive promotion</li>
+        <li><strong>Marketing</strong> – focus on customer needs</li>
+        <li><strong>Societal</strong> – balance customer + society needs</li>
+      </ul>
+    </div>
+    <div class="topic-card" style="--card-accent:#e63312">
+      <div class="card-label">1.3 Evolution</div>
+      <div class="card-title">How Marketing Changed</div>
+      <ul class="card-points">
+        <li>1800s: Production era — "make it, sell it"</li>
+        <li>1920s: Sales era — persuasion & advertising</li>
+        <li>1950s: Marketing era — customer-first thinking</li>
+        <li>1980s: Relationship marketing — retain customers</li>
+        <li>2000s+: Digital & data-driven marketing</li>
+      </ul>
+    </div>
+  </div>
+
+  <div class="section-title" style="font-size:22px; margin-bottom:16px;">Evolution Timeline</div>
+  <div class="flow">
+    <div class="flow-step"><div class="step-num">1800s</div><div class="step-label">Production Era</div></div>
+    <div class="flow-arrow">→</div>
+    <div class="flow-step"><div class="step-num">1920s</div><div class="step-label">Sales Era</div></div>
+    <div class="flow-arrow">→</div>
+    <div class="flow-step"><div class="step-num">1950s</div><div class="step-label">Marketing Era</div></div>
+    <div class="flow-arrow">→</div>
+    <div class="flow-step"><div class="step-num">1980s</div><div class="step-label">Relationship</div></div>
+    <div class="flow-arrow">→</div>
+    <div class="flow-step"><div class="step-num">2000s+</div><div class="step-label">Digital / Data</div></div>
+  </div>
+
+  <div class="concepts-row">
+    <div class="badge red">Needs</div>
+    <div class="badge red">Wants</div>
+    <div class="badge red">Demands</div>
+    <div class="badge">Exchange</div>
+    <div class="badge">Value</div>
+    <div class="badge amber">4 Ps</div>
+    <div class="badge amber">Societal Marketing</div>
+    <div class="badge">Market</div>
+    <div class="badge">Customer Satisfaction</div>
+  </div>
+</div>
+
+<!-- ═══════════ TOPIC 2 ═══════════ -->
+<div id="t2" class="section-panel">
+  <div class="section-title">Topic 2 · Marketing Management</div>
+  <p class="section-desc">How organisations plan, organise, and control marketing activities to satisfy customers and achieve business goals.</p>
+  <div class="divider"></div>
+
+  <div class="highlight-box">
+    <h3>🧠 Key Idea</h3>
+    <p>Marketing management is the process of planning and executing the conception, pricing, promotion, and distribution of ideas, goods, and services to create exchanges that satisfy individual and organisational goals.</p>
+  </div>
+
+  <div class="topic-grid">
+    <div class="topic-card" style="--card-accent:#d97706">
+      <div class="card-label">2.0 Planning</div>
+      <div class="card-title">Marketing Planning Process</div>
+      <ul class="card-points">
+        <li>Situation analysis (SWOT)</li>
+        <li>Setting marketing objectives</li>
+        <li>Formulating marketing strategies</li>
+        <li>Developing action plans & budgets</li>
+        <li>Monitoring & evaluation</li>
+      </ul>
+    </div>
+    <div class="topic-card" style="--card-accent:#d97706">
+      <div class="card-label">2.1 Organisation & Control</div>
+      <div class="card-title">Marketing Department</div>
+      <ul class="card-points">
+        <li>Functional organisation — by activity (advertising, sales, research)</li>
+        <li>Geographic — by region/territory</li>
+        <li>Product management — brand managers</li>
+        <li>Market management — customer segment focus</li>
+        <li>Control: compare results vs objectives, corrective action</li>
+      </ul>
+    </div>
+    <div class="topic-card" style="--card-accent:#d97706">
+      <div class="card-label">2.3 Customer Value</div>
+      <div class="card-title">Satisfaction & Retention</div>
+      <ul class="card-points">
+        <li>Customer Value = Benefits – Costs</li>
+        <li>Satisfaction = Performance vs Expectations</li>
+        <li>Delight = Exceeding expectations</li>
+        <li>Retention is cheaper than acquisition</li>
+        <li>Loyalty programmes, CRM systems</li>
+      </ul>
+    </div>
+    <div class="topic-card" style="--card-accent:#d97706">
+      <div class="card-label">2.4 MIS & Research</div>
+      <div class="card-title">Marketing Information Systems</div>
+      <ul class="card-points">
+        <li>Internal records (sales data, inventory)</li>
+        <li>Marketing intelligence (environmental scanning)</li>
+        <li>Marketing research (primary & secondary data)</li>
+        <li>Decision Support Systems (DSS)</li>
+        <li>Research process: define → collect → analyse → report</li>
+      </ul>
+    </div>
+  </div>
+
+  <div class="section-title" style="font-size:22px; margin-bottom:16px;">SWOT Analysis Framework</div>
+  <div class="mix-grid">
+    <div class="mix-card mc-green">
+      <h3>💪 Strengths</h3>
+      <ul><li>Internal advantages</li><li>What the company does well</li><li>Unique resources & capabilities</li></ul>
+    </div>
+    <div class="mix-card mc-red">
+      <h3>⚠️ Weaknesses</h3>
+      <ul><li>Internal disadvantages</li><li>Areas needing improvement</li><li>Resource gaps</li></ul>
+    </div>
+    <div class="mix-card mc-blue">
+      <h3>🌟 Opportunities</h3>
+      <ul><li>External favourable trends</li><li>Unmet customer needs</li><li>New markets to enter</li></ul>
+    </div>
+    <div class="mix-card mc-amber">
+      <h3>🔥 Threats</h3>
+      <ul><li>External unfavourable trends</li><li>Competitors, regulations</li><li>Changing customer preferences</li></ul>
+    </div>
+  </div>
+</div>
+
+<!-- ═══════════ TOPIC 3 ═══════════ -->
+<div id="t3" class="section-panel">
+  <div class="section-title">Topic 3 · Product Decisions</div>
+  <p class="section-desc">Understanding what a product is, how it is developed, classified, branded and packaged.</p>
+  <div class="divider"></div>
+
+  <div class="highlight-box">
+    <h3>📦 Kotler's 3 Product Levels</h3>
+    <ul>
+      <li><strong style="color:#f5f0e8">Core Product</strong> – The fundamental benefit the customer is really buying (e.g., buying a drill = buying holes)</li>
+      <li><strong style="color:#f5f0e8">Actual Product</strong> – The physical product with features, quality, brand name, and packaging</li>
+      <li><strong style="color:#f5f0e8">Augmented Product</strong> – Additional services like warranty, delivery, after-sales support</li>
+    </ul>
+  </div>
+
+  <div class="topic-grid">
+    <div class="topic-card" style="--card-accent:#1d6b3b">
+      <div class="card-label">3.1 Classification</div>
+      <div class="card-title">Types of Products</div>
+      <ul class="card-points">
+        <li><strong>Consumer goods:</strong> Convenience, Shopping, Specialty, Unsought</li>
+        <li><strong>Industrial goods:</strong> Materials, Capital, Supplies</li>
+        <li>Products vs Services (intangibility, perishability)</li>
+        <li>Product lifecycle: Introduction → Growth → Maturity → Decline</li>
+      </ul>
+    </div>
+    <div class="topic-card" style="--card-accent:#1d6b3b">
+      <div class="card-label">3.2 Branding</div>
+      <div class="card-title">Brand Decisions</div>
+      <ul class="card-points">
+        <li>Brand = name, sign, symbol, design or combination</li>
+        <li>Brand equity = the added value a brand gives</li>
+        <li>Manufacturer vs private brands</li>
+        <li>Brand extension, co-branding, re-branding</li>
+        <li>Brand accounting: measuring brand financial value</li>
+      </ul>
+    </div>
+    <div class="topic-card" style="--card-accent:#1d6b3b">
+      <div class="card-label">3.1 Development</div>
+      <div class="card-title">New Product Development</div>
+      <ul class="card-points">
+        <li>Idea generation → Screening → Concept testing</li>
+        <li>Business analysis → Product development</li>
+        <li>Test marketing → Commercialisation</li>
+        <li>Most new products fail — why? Poor research, bad timing</li>
+      </ul>
+    </div>
+    <div class="topic-card" style="--card-accent:#1d6b3b">
+      <div class="card-label">3.3 Packaging & Labelling</div>
+      <div class="card-title">Packaging Strategy</div>
+      <ul class="card-points">
+        <li>Protects the product during transport</li>
+        <li>Attracts attention & communicates value</li>
+        <li>Label = information carrier (ingredients, instructions)</li>
+        <li>Legal labelling requirements</li>
+        <li>Green/sustainable packaging trends</li>
+      </ul>
+    </div>
+  </div>
+
+  <div class="section-title" style="font-size:22px; margin-bottom:16px;">Product Lifecycle</div>
+  <div class="flow">
+    <div class="flow-step"><div class="step-num">📥</div><div class="step-label">Introduction<br><small>High cost, low sales</small></div></div>
+    <div class="flow-arrow">→</div>
+    <div class="flow-step"><div class="step-num">📈</div><div class="step-label">Growth<br><small>Rising sales & profits</small></div></div>
+    <div class="flow-arrow">→</div>
+    <div class="flow-step"><div class="step-num">🏆</div><div class="step-label">Maturity<br><small>Peak sales, competition</small></div></div>
+    <div class="flow-arrow">→</div>
+    <div class="flow-step"><div class="step-num">📉</div><div class="step-label">Decline<br><small>Falling sales, exit</small></div></div>
+  </div>
+</div>
+
+<!-- ═══════════ TOPIC 4 ═══════════ -->
+<div id="t4" class="section-panel">
+  <div class="section-title">Topic 4 · Consumer Markets & Buyer Behaviour</div>
+  <p class="section-desc">Why do people buy? What influences their decisions? How do we group customers to serve them better?</p>
+  <div class="divider"></div>
+
+  <div class="highlight-box">
+    <h3>🧠 The Buying Decision Process</h3>
+    <p>Problem Recognition → Information Search → Evaluation of Alternatives → Purchase Decision → Post-Purchase Behaviour</p>
+    <p style="margin-top:8px">Marketing aims to influence this process at every stage.</p>
+  </div>
+
+  <div class="topic-grid">
+    <div class="topic-card" style="--card-accent:#1e40af">
+      <div class="card-label">4.0 Influencing Factors</div>
+      <div class="card-title">What Affects Buyer Behaviour</div>
+      <ul class="card-points">
+        <li><strong>Cultural:</strong> Culture, subculture, social class</li>
+        <li><strong>Social:</strong> Reference groups, family, roles & status</li>
+        <li><strong>Personal:</strong> Age, occupation, lifestyle, personality, income</li>
+        <li><strong>Psychological:</strong> Motivation (Maslow), perception, learning, beliefs</li>
+      </ul>
+    </div>
+    <div class="topic-card" style="--card-accent:#1e40af">
+      <div class="card-label">4.1 Behaviour Types</div>
+      <div class="card-title">Buyer vs Consumer</div>
+      <ul class="card-points">
+        <li><strong>Buyer</strong> = the person who pays for the product</li>
+        <li><strong>Consumer</strong> = the person who uses the product</li>
+        <li>Can be the same or different people</li>
+        <li>B2C: individual consumers</li>
+        <li>B2B: business buyers — more rational, formal process</li>
+      </ul>
+    </div>
+    <div class="topic-card" style="--card-accent:#1e40af">
+      <div class="card-label">4.2 & 4.3 Segmentation</div>
+      <div class="card-title">Market Segmentation</div>
+      <ul class="card-points">
+        <li>Dividing the market into distinct groups of buyers</li>
+        <li><strong>Geographic:</strong> Region, city, climate</li>
+        <li><strong>Demographic:</strong> Age, gender, income, education</li>
+        <li><strong>Psychographic:</strong> Lifestyle, personality, values</li>
+        <li><strong>Behavioural:</strong> Usage rate, loyalty, occasions</li>
+      </ul>
+    </div>
+    <div class="topic-card" style="--card-accent:#1e40af">
+      <div class="card-label">Targeting</div>
+      <div class="card-title">Selecting Target Markets</div>
+      <ul class="card-points">
+        <li>Undifferentiated (mass marketing)</li>
+        <li>Differentiated (multiple segments)</li>
+        <li>Concentrated (niche marketing)</li>
+        <li>Micromarketing (local or individual)</li>
+        <li>Choose based on resources & segment attractiveness</li>
+      </ul>
+    </div>
+  </div>
+
+  <div class="section-title" style="font-size:22px; margin-bottom:16px;">Maslow's Hierarchy of Needs</div>
+  <div class="flow" style="flex-direction:column; align-items:stretch; gap:8px;">
+    <div class="flow-step" style="background:#e63312; color:white; text-align:left; padding:14px 20px">
+      <div style="font-weight:700">🔝 Self-Actualisation</div>
+      <div style="font-size:12px; opacity:.85">Personal growth, achieving full potential</div>
+    </div>
+    <div class="flow-step" style="background:#d97706; color:white; text-align:left; padding:14px 20px">
+      <div style="font-weight:700">🏅 Esteem Needs</div>
+      <div style="font-size:12px; opacity:.85">Status, recognition, achievement</div>
+    </div>
+    <div class="flow-step" style="background:#1e40af; color:white; text-align:left; padding:14px 20px">
+      <div style="font-weight:700">🤝 Social Needs</div>
+      <div style="font-size:12px; opacity:.85">Belonging, love, friendship</div>
+    </div>
+    <div class="flow-step" style="background:#1d6b3b; color:white; text-align:left; padding:14px 20px">
+      <div style="font-weight:700">🛡️ Safety Needs</div>
+      <div style="font-size:12px; opacity:.85">Security, stability, freedom from fear</div>
+    </div>
+    <div class="flow-step" style="background:#333; color:white; text-align:left; padding:14px 20px">
+      <div style="font-weight:700">🍞 Physiological Needs</div>
+      <div style="font-size:12px; opacity:.85">Food, water, shelter, warmth — survival basics</div>
+    </div>
+  </div>
+</div>
+
+<!-- ═══════════ TOPIC 6 ═══════════ -->
+<div id="t6" class="section-panel">
+  <div class="section-title">Topic 6 · Pricing Strategies & Programmes</div>
+  <p class="section-desc">Price is the only P that generates revenue — all others create costs. Getting it right is critical.</p>
+  <div class="divider"></div>
+
+  <div class="highlight-box">
+    <h3>💰 Why Pricing Matters</h3>
+    <p>Price signals quality, affects demand, and determines profitability. A 1% improvement in price can improve profit by 11%, making pricing the most powerful profit lever (McKinsey research).</p>
+  </div>
+
+  <div class="topic-grid">
+    <div class="topic-card" style="--card-accent:#7c3aed">
+      <div class="card-label">6.0 Setting the Price</div>
+      <div class="card-title">Steps in Pricing</div>
+      <ul class="card-points">
+        <li>Select the pricing objective</li>
+        <li>Determine demand (price elasticity)</li>
+        <li>Estimate costs (fixed + variable)</li>
+        <li>Analyse competitors' prices</li>
+        <li>Select pricing method</li>
+        <li>Select final price</li>
+      </ul>
+    </div>
+    <div class="topic-card" style="--card-accent:#7c3aed">
+      <div class="card-label">Pricing Objectives</div>
+      <div class="card-title">What Are We Trying to Achieve?</div>
+      <ul class="card-points">
+        <li>Survival — cover costs when demand is low</li>
+        <li>Maximum profit — find the profit-maximising point</li>
+        <li>Maximum market share — penetration pricing</li>
+        <li>Market skimming — high price for early adopters</li>
+        <li>Product-quality leadership — premium positioning</li>
+      </ul>
+    </div>
+    <div class="topic-card" style="--card-accent:#7c3aed">
+      <div class="card-label">6.1 Adapting Prices</div>
+      <div class="card-title">Price Adaptation Strategies</div>
+      <ul class="card-points">
+        <li>Geographical pricing (vary by location)</li>
+        <li>Discount & allowance pricing</li>
+        <li>Promotional pricing (loss leaders, special events)</li>
+        <li>Discriminatory pricing (different customers, different prices)</li>
+        <li>Product-mix pricing (bundle, optional, captive)</li>
+      </ul>
+    </div>
+    <div class="topic-card" style="--card-accent:#7c3aed">
+      <div class="card-label">Price Changes</div>
+      <div class="card-title">Initiating & Responding</div>
+      <ul class="card-points">
+        <li>Initiating cuts: gain market share, excess capacity</li>
+        <li>Initiating increases: cost inflation, excess demand</li>
+        <li>Responding to competitor cuts: maintain, reduce, or reposition</li>
+        <li>Price wars — dangerous for all participants</li>
+      </ul>
+    </div>
+  </div>
+
+  <div class="concepts-row">
+    <div class="badge" style="background:#7c3aed">Cost-Plus Pricing</div>
+    <div class="badge" style="background:#7c3aed">Value-Based Pricing</div>
+    <div class="badge" style="background:#7c3aed">Competitive Pricing</div>
+    <div class="badge amber">Penetration</div>
+    <div class="badge amber">Skimming</div>
+    <div class="badge">Price Elasticity</div>
+    <div class="badge">Break-Even Point</div>
+    <div class="badge red">Price Discrimination</div>
+  </div>
+</div>
+
+<!-- ═══════════ TOPIC 7 ═══════════ -->
+<div id="t7" class="section-panel">
+  <div class="section-title">Topic 7 · Promotion & Marketing Comms</div>
+  <p class="section-desc">How businesses communicate with their target markets through advertising, PR, sales promotions, and personal selling.</p>
+  <div class="divider"></div>
+
+  <div class="highlight-box">
+    <h3>📣 The IMC Concept</h3>
+    <p>Integrated Marketing Communications (IMC) coordinates all promotional tools to deliver a clear, consistent, and compelling message about the brand to customers.</p>
+  </div>
+
+  <div class="topic-grid">
+    <div class="topic-card" style="--card-accent:#0e7490">
+      <div class="card-label">7.0 Advertising</div>
+      <div class="card-title">Setting Ad Objectives</div>
+      <ul class="card-points">
+        <li>Informative — educate the market (new products)</li>
+        <li>Persuasive — build preference, encourage switching</li>
+        <li>Reminder — keep the brand top of mind</li>
+        <li>Reinforcement — reassure existing buyers</li>
+      </ul>
+    </div>
+    <div class="topic-card" style="--card-accent:#0e7490">
+      <div class="card-label">7.1 Ad Budget & Media</div>
+      <div class="card-title">Deciding on Advertising</div>
+      <ul class="card-points">
+        <li>Budget methods: affordable, % of sales, competitive parity, objective-and-task</li>
+        <li>Message: unique selling proposition (USP)</li>
+        <li>Media: TV, radio, newspapers, digital, outdoor</li>
+        <li>Reach, frequency, and impact</li>
+        <li>Timing: continuous, pulsing, flighting</li>
+      </ul>
+    </div>
+    <div class="topic-card" style="--card-accent:#0e7490">
+      <div class="card-label">7.2 Sales Promotion & PR</div>
+      <div class="card-title">Below-the-Line Tools</div>
+      <ul class="card-points">
+        <li>Consumer promotions: coupons, samples, contests, loyalty cards</li>
+        <li>Trade promotions: price-off deals, free goods</li>
+        <li>PR: press releases, events, sponsorships</li>
+        <li>PR goal: positive image, manage negative publicity</li>
+      </ul>
+    </div>
+    <div class="topic-card" style="--card-accent:#0e7490">
+      <div class="card-label">7.3 Comms Mix</div>
+      <div class="card-title">The 5 Tools of Promotion</div>
+      <ul class="card-points">
+        <li>Advertising — paid, non-personal</li>
+        <li>Sales Promotion — short-term incentives</li>
+        <li>Public Relations — earned media</li>
+        <li>Personal Selling — direct interaction</li>
+        <li>Direct Marketing — targeted mail/digital</li>
+      </ul>
+    </div>
+  </div>
+</div>
+
+<!-- ═══════════ TOPIC 8 ═══════════ -->
+<div id="t8" class="section-panel">
+  <div class="section-title">Topic 8 · Managing the Sales Force</div>
+  <p class="section-desc">The sales force is the company's direct link to customers. Managing it well drives revenue and builds lasting relationships.</p>
+  <div class="divider"></div>
+
+  <div class="highlight-box">
+    <h3>🤝 Sales Force Role</h3>
+    <p>Sales representatives prospect new customers, communicate product value, negotiate, close sales, service accounts, gather market intelligence, and allocate products during scarcity.</p>
+  </div>
+
+  <div class="topic-grid">
+    <div class="topic-card" style="--card-accent:#be123c">
+      <div class="card-label">8.0 Structure</div>
+      <div class="card-title">Sales Force Design</div>
+      <ul class="card-points">
+        <li>Territorial — each rep covers a geographic area</li>
+        <li>Product — reps specialise by product line</li>
+        <li>Customer (Market) — reps by customer type</li>
+        <li>Complex — combination of above</li>
+        <li>Size determined by workload method</li>
+      </ul>
+    </div>
+    <div class="topic-card" style="--card-accent:#be123c">
+      <div class="card-label">8.1 Recruitment</div>
+      <div class="card-title">Selecting Sales Reps</div>
+      <ul class="card-points">
+        <li>Define ideal candidate profile</li>
+        <li>Source: job boards, referrals, colleges</li>
+        <li>Traits: empathy, ego drive, persistence</li>
+        <li>Selection tools: interviews, role plays, psychometrics</li>
+        <li>Background & reference checks</li>
+      </ul>
+    </div>
+    <div class="topic-card" style="--card-accent:#be123c">
+      <div class="card-label">8.2 Motivation</div>
+      <div class="card-title">Motivating the Sales Force</div>
+      <ul class="card-points">
+        <li>Financial: salary, commission, bonuses, benefits</li>
+        <li>Non-financial: recognition, promotion, autonomy</li>
+        <li>Sales contests & incentive programmes</li>
+        <li>Quota setting — SMART targets</li>
+        <li>Regular training & development</li>
+      </ul>
+    </div>
+    <div class="topic-card" style="--card-accent:#be123c">
+      <div class="card-label">8.3 Retention</div>
+      <div class="card-title">Keeping Customers</div>
+      <ul class="card-points">
+        <li>CRM — Customer Relationship Management</li>
+        <li>After-sales service & follow-up</li>
+        <li>Handling complaints effectively</li>
+        <li>Building loyalty programmes</li>
+        <li>It costs 5× more to acquire a new customer than retain one</li>
+      </ul>
+    </div>
+  </div>
+
+  <div class="section-title" style="font-size:22px; margin-bottom:16px;">Sales Process Steps</div>
+  <div class="flow" style="flex-wrap:wrap; justify-content:center">
+    <div class="flow-step"><div class="step-num">1</div><div class="step-label">Prospecting</div></div>
+    <div class="flow-arrow">→</div>
+    <div class="flow-step"><div class="step-num">2</div><div class="step-label">Pre-approach</div></div>
+    <div class="flow-arrow">→</div>
+    <div class="flow-step"><div class="step-num">3</div><div class="step-label">Approach</div></div>
+    <div class="flow-arrow">→</div>
+    <div class="flow-step"><div class="step-num">4</div><div class="step-label">Presentation</div></div>
+    <div class="flow-arrow">→</div>
+    <div class="flow-step"><div class="step-num">5</div><div class="step-label">Handle Objections</div></div>
+    <div class="flow-arrow">→</div>
+    <div class="flow-step"><div class="step-num">6</div><div class="step-label">Closing</div></div>
+    <div class="flow-arrow">→</div>
+    <div class="flow-step"><div class="step-num">7</div><div class="step-label">Follow-Up</div></div>
+  </div>
+</div>
+
+<!-- ═══════════ TOPIC 9 ═══════════ -->
+<div id="t9" class="section-panel">
+  <div class="section-title">Topic 9 · Dealing with Competition</div>
+  <p class="section-desc">Understanding the competitive landscape and how to build strategies that outperform rivals while adapting to change.</p>
+  <div class="divider"></div>
+
+  <div class="highlight-box">
+    <h3>⚔️ Two Ways to View Competition</h3>
+    <ul>
+      <li><strong style="color:#f5f0e8">Industry Concept:</strong> Competitors are businesses selling similar products in the same industry (e.g., all soft drink companies)</li>
+      <li><strong style="color:#f5f0e8">Market Concept:</strong> Competitors are anyone satisfying the same customer need (e.g., Coca-Cola competes with water, juice, coffee, etc.)</li>
+    </ul>
+  </div>
+
+  <div class="topic-grid">
+    <div class="topic-card" style="--card-accent:#065f46">
+      <div class="card-label">9.1 Competitive Analysis</div>
+      <div class="card-title">Analysing Competitors</div>
+      <ul class="card-points">
+        <li>Identify who your competitors are</li>
+        <li>Assess their objectives, strategies & strengths</li>
+        <li>Estimate their reactions to your moves</li>
+        <li>Porter's 5 Forces framework</li>
+        <li>Competitive intelligence gathering</li>
+      </ul>
+    </div>
+    <div class="topic-card" style="--card-accent:#065f46">
+      <div class="card-label">Competitive Positions</div>
+      <div class="card-title">4 Market Roles</div>
+      <ul class="card-points">
+        <li><strong>Market Leader</strong> — largest market share (defend)</li>
+        <li><strong>Market Challenger</strong> — #2 or #3, attacks leader</li>
+        <li><strong>Market Follower</strong> — copies leader safely</li>
+        <li><strong>Market Nicher</strong> — serves small specialist segments</li>
+      </ul>
+    </div>
+    <div class="topic-card" style="--card-accent:#065f46">
+      <div class="card-label">9.2 Competitive Strategies</div>
+      <div class="card-title">Porter's Generic Strategies</div>
+      <ul class="card-points">
+        <li>Cost Leadership — be the cheapest producer</li>
+        <li>Differentiation — be unique, charge premium</li>
+        <li>Focus — serve a narrow market excellently</li>
+        <li>Stuck in the middle = danger zone</li>
+      </ul>
+    </div>
+    <div class="topic-card" style="--card-accent:#065f46">
+      <div class="card-label">9.2 How Business is Changing</div>
+      <div class="card-title">Adapting to Change</div>
+      <ul class="card-points">
+        <li>Globalisation — competing worldwide</li>
+        <li>Digital disruption — e-commerce, social media</li>
+        <li>Customer power — informed, demanding buyers</li>
+        <li>Companies respond: CRM, innovation, agility</li>
+        <li>Sustainability & CSR demands increasing</li>
+      </ul>
+    </div>
+  </div>
+
+  <div class="section-title" style="font-size:22px; margin-bottom:16px;">Porter's 5 Forces</div>
+  <div class="mix-grid">
+    <div class="mix-card mc-red"><h3>🏭 Rivalry</h3><ul><li>Intensity of competition among existing firms</li><li>High rivalry = price wars, low profits</li></ul></div>
+    <div class="mix-card mc-amber"><h3>🆕 New Entrants</h3><ul><li>Threat of new companies entering the market</li><li>Barriers to entry reduce this threat</li></ul></div>
+    <div class="mix-card mc-blue"><h3>🔄 Substitutes</h3><ul><li>Alternative products that meet same need</li><li>High substitutes = lower pricing power</li></ul></div>
+    <div class="mix-card mc-green"><h3>🛒 Buyer Power</h3><ul><li>How much influence customers have on price</li><li>High power = customers demand low prices</li></ul></div>
+  </div>
+</div>
+
+<!-- ═══════════ Q&A SECTION ═══════════ -->
+<div id="qa" class="section-panel">
+  <div class="section-title">Exam Q&amp;A — Questions &amp; Full Answers</div>
+  <p class="section-desc">30 exam-style questions with complete answers covering all 9 topics. Click any question to reveal the answer.</p>
+  <div class="divider"></div>
+
+  <!-- Topic 1 -->
+  <div class="card-label" style="font-size:13px; margin-bottom:12px; color:#e63312">■ TOPIC 1 — Introduction to Marketing</div>
+
+  <div class="qa-item">
+    <div class="qa-question" onclick="toggleQA(this)">
+      <div class="qa-q-num">Q1</div>
+      <div class="qa-q-text">Define marketing and explain its role in an organisation.</div>
+      <div class="qa-chevron">▾</div>
+    </div>
+    <div class="qa-answer">
+      <strong>Definition:</strong> Marketing is the process of planning and executing the conception, pricing, promotion, and distribution of ideas, goods, and services to create exchanges that satisfy individual and organisational goals (AMA definition). Kotler describes it as "a social and managerial process by which individuals and groups obtain what they need and want through creating, offering, and exchanging products of value."<br><br>
+      <strong>Role in an organisation:</strong>
+      <ul>
+        <li>Identifies customer needs and wants through research</li>
+        <li>Develops products/services that satisfy those needs</li>
+        <li>Sets prices that reflect value and generate profit</li>
+        <li>Distributes products through appropriate channels</li>
+        <li>Communicates value to target markets through promotion</li>
+        <li>Builds long-term relationships with customers</li>
+        <li>Drives revenue, brand equity, and competitive advantage</li>
+      </ul>
+    </div>
+  </div>
+
+  <div class="qa-item">
+    <div class="qa-question" onclick="toggleQA(this)">
+      <div class="qa-q-num">Q2</div>
+      <div class="qa-q-text">Describe the five marketing management philosophies/concepts.</div>
+      <div class="qa-chevron">▾</div>
+    </div>
+    <div class="qa-answer">
+      <ul>
+        <li><strong>Production Concept:</strong> Consumers prefer products that are widely available and affordable. Companies focus on production efficiency and distribution. Works when demand exceeds supply.</li>
+        <li><strong>Product Concept:</strong> Consumers favour products offering the most quality, performance, and innovative features. Risk: marketing myopia — ignoring customer needs.</li>
+        <li><strong>Selling Concept:</strong> Consumers won't buy enough unless the company undertakes aggressive selling and promotion. Focus is on transactions, not relationships.</li>
+        <li><strong>Marketing Concept:</strong> Achieving organisational goals depends on knowing the needs/wants of target markets and delivering desired satisfactions better than competitors. Customer-first approach.</li>
+        <li><strong>Societal Marketing Concept:</strong> The company should determine needs/wants of target markets and deliver satisfactions in a way that maintains/improves both consumer and society's wellbeing. Adds a social/ethical dimension.</li>
+      </ul>
+    </div>
+  </div>
+
+  <div class="qa-item">
+    <div class="qa-question" onclick="toggleQA(this)">
+      <div class="qa-q-num">Q3</div>
+      <div class="qa-q-text">Explain the evolution of marketing from the production era to the digital era.</div>
+      <div class="qa-chevron">▾</div>
+    </div>
+    <div class="qa-answer">
+      <ul>
+        <li><strong>Production Era (pre-1920s):</strong> Demand exceeded supply. Companies focused on increasing production and reducing costs. "Build it and they will buy it."</li>
+        <li><strong>Sales Era (1920s–1950s):</strong> Supply began to exceed demand. Companies adopted aggressive selling and advertising to move products. Customer needs still ignored.</li>
+        <li><strong>Marketing Era (1950s–1980s):</strong> Customer needs placed at the centre. Companies discovered that understanding customer needs first leads to greater success. Marketing departments grew in power.</li>
+        <li><strong>Relationship Marketing Era (1980s–2000s):</strong> Focus shifted from single transactions to long-term customer relationships. CRM systems emerged. Customer lifetime value became important.</li>
+        <li><strong>Digital/Social Era (2000s–present):</strong> Internet, social media, big data, and mobile technology transformed marketing. Personalisation, two-way communication, influencer marketing, and e-commerce became dominant.</li>
+      </ul>
+    </div>
+  </div>
+
+  <div class="qa-item">
+    <div class="qa-question" onclick="toggleQA(this)">
+      <div class="qa-q-num">Q4</div>
+      <div class="qa-q-text">What are the 4 Ps of the Marketing Mix? Briefly explain each.</div>
+      <div class="qa-chevron">▾</div>
+    </div>
+    <div class="qa-answer">
+      The Marketing Mix (4 Ps) is the set of controllable tactical marketing tools that a firm blends to produce the response it wants in the target market:
+      <ul>
+        <li><strong>Product:</strong> The goods, services, or ideas offered to satisfy customer needs. Includes design, quality, features, branding, packaging, and product lifecycle management.</li>
+        <li><strong>Price:</strong> The amount customers pay. The only revenue-generating P. Includes pricing strategies (skimming, penetration), discounts, and payment terms.</li>
+        <li><strong>Place (Distribution):</strong> How the product reaches the customer. Includes distribution channels, logistics, retail locations, and supply chain management.</li>
+        <li><strong>Promotion:</strong> How the company communicates with customers. Includes advertising, sales promotion, public relations, personal selling, and direct marketing.</li>
+      </ul>
+    </div>
+  </div>
+
+  <!-- Topic 2 -->
+  <div class="card-label" style="font-size:13px; margin:24px 0 12px; color:#d97706">■ TOPIC 2 — Marketing Management</div>
+
+  <div class="qa-item">
+    <div class="qa-question" onclick="toggleQA(this)">
+      <div class="qa-q-num">Q5</div>
+      <div class="qa-q-text">What is a Marketing Information System (MIS) and what are its four components?</div>
+      <div class="qa-chevron">▾</div>
+    </div>
+    <div class="qa-answer">
+      A <strong>Marketing Information System (MIS)</strong> consists of people, equipment, and procedures to gather, sort, analyse, evaluate, and distribute needed, timely, and accurate information to marketing decision makers.<br><br>
+      <strong>Four components:</strong>
+      <ul>
+        <li><strong>Internal Records System:</strong> Data collected within the company — orders, sales, prices, inventory, accounts receivable. Fastest way to get data.</li>
+        <li><strong>Marketing Intelligence System:</strong> Everyday information about developments in the marketing environment — reading newspapers, talking to customers, suppliers, and distributors.</li>
+        <li><strong>Marketing Research System:</strong> Systematic design, collection, analysis, and reporting of data relevant to a specific marketing situation. Can be primary (new) or secondary (existing) data.</li>
+        <li><strong>Decision Support System (DSS):</strong> Coordinated collection of data, systems, tools, and techniques that help managers make better decisions. Uses models and software.</li>
+      </ul>
+    </div>
+  </div>
+
+  <div class="qa-item">
+    <div class="qa-question" onclick="toggleQA(this)">
+      <div class="qa-q-num">Q6</div>
+      <div class="qa-q-text">What is customer value and how is customer satisfaction measured?</div>
+      <div class="qa-chevron">▾</div>
+    </div>
+    <div class="qa-answer">
+      <strong>Customer Value</strong> is the difference between the total customer value (the bundle of benefits customers expect from a product) and the total customer cost (what they sacrifice to acquire it).<br><br>
+      <em>Customer Value = Total Benefits – Total Costs</em><br><br>
+      <strong>Customer Satisfaction</strong> is the level of a person's felt state resulting from comparing a product's perceived performance with their expectations:<br><br>
+      <ul>
+        <li>Performance &lt; Expectations → Dissatisfied customer</li>
+        <li>Performance = Expectations → Satisfied customer</li>
+        <li>Performance &gt; Expectations → Delighted customer</li>
+      </ul>
+      <strong>Measurement tools:</strong> Customer surveys, mystery shoppers, lost customer analysis, complaint tracking, Net Promoter Score (NPS).
+    </div>
+  </div>
+
+  <div class="qa-item">
+    <div class="qa-question" onclick="toggleQA(this)">
+      <div class="qa-q-num">Q7</div>
+      <div class="qa-q-text">Explain the marketing planning process using SWOT analysis.</div>
+      <div class="qa-chevron">▾</div>
+    </div>
+    <div class="qa-answer">
+      The marketing planning process involves:<br><br>
+      <strong>1. Situation Analysis (SWOT):</strong>
+      <ul>
+        <li><strong>Strengths (internal):</strong> What the company does well — strong brand, skilled staff, efficient processes</li>
+        <li><strong>Weaknesses (internal):</strong> Areas needing improvement — limited budget, poor distribution</li>
+        <li><strong>Opportunities (external):</strong> Favourable trends — new markets, changing customer preferences</li>
+        <li><strong>Threats (external):</strong> Unfavourable forces — new competitors, regulations, economic downturns</li>
+      </ul>
+      <strong>2. Set Marketing Objectives:</strong> SMART goals based on SWOT findings.<br>
+      <strong>3. Develop Strategies:</strong> How to achieve objectives using the 4 Ps.<br>
+      <strong>4. Implement Action Plans:</strong> Assign responsibilities, timelines, budgets.<br>
+      <strong>5. Monitor and Control:</strong> Track performance and make corrections.
+    </div>
+  </div>
+
+  <!-- Topic 3 -->
+  <div class="card-label" style="font-size:13px; margin:24px 0 12px; color:#1d6b3b">■ TOPIC 3 — Product Decisions</div>
+
+  <div class="qa-item">
+    <div class="qa-question" onclick="toggleQA(this)">
+      <div class="qa-q-num">Q8</div>
+      <div class="qa-q-text">Explain Kotler's three levels of a product with examples.</div>
+      <div class="qa-chevron">▾</div>
+    </div>
+    <div class="qa-answer">
+      <strong>1. Core Product (Core Benefit):</strong><br>
+      The fundamental service or benefit the customer is really buying. It answers: "What is the buyer really buying?"<br>
+      <em>Example: When buying a hotel room, the core product is rest and sleep.</em><br><br>
+      <strong>2. Actual Product:</strong><br>
+      The physical product with specific features, quality level, brand name, design, and packaging that delivers the core benefit.<br>
+      <em>Example: The hotel room itself — the bed, decor, cleanliness, brand (e.g., Hilton), and room features.</em><br><br>
+      <strong>3. Augmented Product:</strong><br>
+      Additional services and benefits built around the core and actual product — warranties, after-sales service, delivery, installation, customer support.<br>
+      <em>Example: Free breakfast, airport shuttle, loyalty points, 24/7 room service at the hotel.</em>
+    </div>
+  </div>
+
+  <div class="qa-item">
+    <div class="qa-question" onclick="toggleQA(this)">
+      <div class="qa-q-num">Q9</div>
+      <div class="qa-q-text">What are the stages of the New Product Development process?</div>
+      <div class="qa-chevron">▾</div>
+    </div>
+    <div class="qa-answer">
+      <ul>
+        <li><strong>1. Idea Generation:</strong> Systematic search for new product ideas — from customers, employees, R&amp;D, competitors.</li>
+        <li><strong>2. Idea Screening:</strong> Filtering to identify good ideas and drop poor ones early. Uses criteria like market size, profitability, feasibility.</li>
+        <li><strong>3. Concept Development &amp; Testing:</strong> Develop detailed concept and test with target consumers to gauge interest and understanding.</li>
+        <li><strong>4. Marketing Strategy Development:</strong> Design initial marketing strategy for new product.</li>
+        <li><strong>5. Business Analysis:</strong> Review of sales, costs, and profit projections to assess viability.</li>
+        <li><strong>6. Product Development:</strong> R&amp;D or engineering creates the physical prototype.</li>
+        <li><strong>7. Test Marketing:</strong> Product introduced into a realistic market setting to test marketing programme.</li>
+        <li><strong>8. Commercialisation:</strong> Full-scale launch — when, where, to whom, and how.</li>
+      </ul>
+    </div>
+  </div>
+
+  <div class="qa-item">
+    <div class="qa-question" onclick="toggleQA(this)">
+      <div class="qa-q-num">Q10</div>
+      <div class="qa-q-text">What is brand equity and why is it important?</div>
+      <div class="qa-chevron">▾</div>
+    </div>
+    <div class="qa-answer">
+      <strong>Brand Equity</strong> is the positive differential effect that knowing the brand name has on customer response to the product or service. It represents the added value a brand gives to a product beyond its functional benefits.<br><br>
+      <strong>Sources of Brand Equity:</strong>
+      <ul>
+        <li>Brand awareness — how well-known is the brand</li>
+        <li>Perceived quality — customer perception of quality</li>
+        <li>Brand associations — mental connections linked to the brand</li>
+        <li>Brand loyalty — repeat purchases and advocacy</li>
+      </ul>
+      <strong>Why it matters:</strong> High brand equity means customers will pay premium prices, be more loyal, and recommend the brand. It provides competitive advantage, makes it easier to launch new products, and has significant financial value (Apple's brand is worth over $880 billion).
+    </div>
+  </div>
+
+  <div class="qa-item">
+    <div class="qa-question" onclick="toggleQA(this)">
+      <div class="qa-q-num">Q11</div>
+      <div class="qa-q-text">Describe the Product Lifecycle and suggest marketing strategies for each stage.</div>
+      <div class="qa-chevron">▾</div>
+    </div>
+    <div class="qa-answer">
+      <ul>
+        <li><strong>Introduction:</strong> Low sales, high costs, no profits yet. Strategy: Create awareness, target early adopters, use penetration or skimming pricing. Heavy advertising investment.</li>
+        <li><strong>Growth:</strong> Rapidly rising sales, improving profits, new competitors enter. Strategy: Maximise market share, improve quality, enter new segments, add distribution channels.</li>
+        <li><strong>Maturity:</strong> Sales peak, profits decline due to competition. Strategy: Defend market share, differentiate, modify product, run promotions, cut prices selectively.</li>
+        <li><strong>Decline:</strong> Sales fall, profits collapse. Strategy: Reduce costs, harvest the product, or exit the market. Focus resources on newer products.</li>
+      </ul>
+    </div>
+  </div>
+
+  <!-- Topic 4 -->
+  <div class="card-label" style="font-size:13px; margin:24px 0 12px; color:#1e40af">■ TOPIC 4 — Consumer Behaviour & Segmentation</div>
+
+  <div class="qa-item">
+    <div class="qa-question" onclick="toggleQA(this)">
+      <div class="qa-q-num">Q12</div>
+      <div class="qa-q-text">What are the four major factors that influence consumer buying behaviour?</div>
+      <div class="qa-chevron">▾</div>
+    </div>
+    <div class="qa-answer">
+      <ul>
+        <li><strong>Cultural Factors:</strong> Culture (values, norms, beliefs of society), subculture (nationality, religion, racial groups), and social class (income, education, occupation).</li>
+        <li><strong>Social Factors:</strong> Reference groups (friends, celebrities, family), family roles, and social status. Family is the most important buying organisation — husband/wife influence varies by product category.</li>
+        <li><strong>Personal Factors:</strong> Age and life cycle stage, occupation, economic situation, lifestyle (activities, interests, opinions), and personality/self-concept.</li>
+        <li><strong>Psychological Factors:</strong> Motivation (Maslow's hierarchy), perception (how we interpret stimuli), learning (changes from experience), and beliefs/attitudes (predispositions to act).</li>
+      </ul>
+    </div>
+  </div>
+
+  <div class="qa-item">
+    <div class="qa-question" onclick="toggleQA(this)">
+      <div class="qa-q-num">Q13</div>
+      <div class="qa-q-text">What is market segmentation? Explain the four bases of segmentation.</div>
+      <div class="qa-chevron">▾</div>
+    </div>
+    <div class="qa-answer">
+      <strong>Market Segmentation</strong> is the process of dividing a market into distinct groups of buyers who have different needs, characteristics, or behaviours, and who might require separate products or marketing programmes.<br><br>
+      <strong>Four Bases:</strong>
+      <ul>
+        <li><strong>Geographic:</strong> Divide market by nations, regions, cities, or neighbourhoods. Example: Urban vs rural marketing.</li>
+        <li><strong>Demographic:</strong> Age, gender, income, education, occupation, family size, religion, nationality. Most popular basis because needs and buying patterns vary closely with demographic variables.</li>
+        <li><strong>Psychographic:</strong> Lifestyle (activities, interests, opinions), personality, social class, values. Example: Luxury goods target status-conscious consumers.</li>
+        <li><strong>Behavioural:</strong> Occasions, usage rate (heavy/light), benefits sought, loyalty status, readiness stage. Example: Airlines target frequent flyers differently from occasional travellers.</li>
+      </ul>
+    </div>
+  </div>
+
+  <div class="qa-item">
+    <div class="qa-question" onclick="toggleQA(this)">
+      <div class="qa-q-num">Q14</div>
+      <div class="qa-q-text">Explain Maslow's Hierarchy of Needs and its relevance to marketing.</div>
+      <div class="qa-chevron">▾</div>
+    </div>
+    <div class="qa-answer">
+      <strong>Maslow's Hierarchy</strong> proposes that human needs are arranged in a pyramid with five levels. People must satisfy lower-level needs before seeking higher-level ones:<br><br>
+      <ul>
+        <li><strong>Physiological:</strong> Food, water, shelter, sleep. Marketing: basic food brands, utility products.</li>
+        <li><strong>Safety:</strong> Security, protection from harm. Marketing: insurance, home security, health products.</li>
+        <li><strong>Social:</strong> Belonging, love, friendship. Marketing: social media, beverages/food ("share a Coke"), clothing brands.</li>
+        <li><strong>Esteem:</strong> Self-esteem, recognition, prestige. Marketing: luxury cars, premium brands, award programmes.</li>
+        <li><strong>Self-Actualisation:</strong> Self-fulfilment, achieving potential. Marketing: education, travel, creative tools.</li>
+      </ul>
+      <strong>Relevance:</strong> Marketers use the hierarchy to understand what motivates their target market and position their products accordingly.
+    </div>
+  </div>
+
+  <div class="qa-item">
+    <div class="qa-question" onclick="toggleQA(this)">
+      <div class="qa-q-num">Q15</div>
+      <div class="qa-q-text">What are the four targeting strategies? When should each be used?</div>
+      <div class="qa-chevron">▾</div>
+    </div>
+    <div class="qa-answer">
+      <ul>
+        <li><strong>Undifferentiated (Mass) Marketing:</strong> One offer for the entire market. Use when product appeals to all (e.g., basic commodities, salt). Lowest cost, but ignores diversity.</li>
+        <li><strong>Differentiated Marketing:</strong> Different offers for multiple segments. Use when company has resources to tailor programmes. Higher cost but potentially higher sales (e.g., car manufacturers offering different models).</li>
+        <li><strong>Concentrated (Niche) Marketing:</strong> One large share of one or few sub-markets. Use for smaller companies with limited resources targeting a specific need gap. High risk if segment shrinks.</li>
+        <li><strong>Micromarketing (Local/Individual):</strong> Tailoring products for local or individual customer needs. Use with big data and personalisation technology. Most expensive but highest relevance (e.g., Amazon product recommendations).</li>
+      </ul>
+    </div>
+  </div>
+
+  <!-- Topic 6 -->
+  <div class="card-label" style="font-size:13px; margin:24px 0 12px; color:#7c3aed">■ TOPIC 6 — Pricing Strategies</div>
+
+  <div class="qa-item">
+    <div class="qa-question" onclick="toggleQA(this)">
+      <div class="qa-q-num">Q16</div>
+      <div class="qa-q-text">What are the key steps involved in setting a price?</div>
+      <div class="qa-chevron">▾</div>
+    </div>
+    <div class="qa-answer">
+      <ul>
+        <li><strong>Step 1 – Select the Pricing Objective:</strong> Survival, maximum profit, maximum market share, or product quality leadership.</li>
+        <li><strong>Step 2 – Determine Demand:</strong> Understand price elasticity. Elastic demand = price-sensitive customers. Inelastic = price insensitive.</li>
+        <li><strong>Step 3 – Estimate Costs:</strong> Calculate fixed costs (don't vary with output) and variable costs (vary with output). Total cost = Fixed + Variable.</li>
+        <li><strong>Step 4 – Analyse Competitors' Costs, Prices, and Offers:</strong> Know where your price sits relative to competition and what value you offer by comparison.</li>
+        <li><strong>Step 5 – Select a Pricing Method:</strong> Cost-plus, target-return, perceived-value, going-rate, or auction-type pricing.</li>
+        <li><strong>Step 6 – Select the Final Price:</strong> Consider psychological pricing (e.g., K99 instead of K100), company pricing policies, and the impact on other parties (distributors, salespeople).</li>
+      </ul>
+    </div>
+  </div>
+
+  <div class="qa-item">
+    <div class="qa-question" onclick="toggleQA(this)">
+      <div class="qa-q-num">Q17</div>
+      <div class="qa-q-text">Differentiate between penetration pricing and market skimming pricing. Give examples.</div>
+      <div class="qa-chevron">▾</div>
+    </div>
+    <div class="qa-answer">
+      <strong>Market Penetration Pricing:</strong>
+      <ul>
+        <li>Setting a low initial price to attract a large number of buyers quickly and gain market share</li>
+        <li>Conditions needed: price-sensitive market, economies of scale available, low price discourages competition</li>
+        <li>Example: Netflix entering a market at a low subscription price; new mobile network operators with cheap data</li>
+      </ul>
+      <strong>Market Skimming Pricing:</strong>
+      <ul>
+        <li>Setting a high initial price to skim maximum revenue from segments willing to pay the high price</li>
+        <li>Conditions needed: sufficient buyers with high current demand, product perceived as high quality/unique, high price signals prestige</li>
+        <li>Example: Apple launching new iPhone at premium price; new PlayStation console launch pricing</li>
+      </ul>
+      <strong>Key difference:</strong> Penetration builds volume fast at low margins; skimming builds profit early at low volume.
+    </div>
+  </div>
+
+  <div class="qa-item">
+    <div class="qa-question" onclick="toggleQA(this)">
+      <div class="qa-q-num">Q18</div>
+      <div class="qa-q-text">What is price elasticity and why does it matter for pricing decisions?</div>
+      <div class="qa-chevron">▾</div>
+    </div>
+    <div class="qa-answer">
+      <strong>Price Elasticity of Demand</strong> measures how sensitive customer demand is to a change in price:<br><br>
+      <em>Price Elasticity = % Change in Quantity Demanded ÷ % Change in Price</em><br><br>
+      <ul>
+        <li><strong>Elastic Demand (|e| &gt; 1):</strong> A small price increase causes a large drop in demand. Customers are very price-sensitive. Example: luxury goods, branded clothing.</li>
+        <li><strong>Inelastic Demand (|e| &lt; 1):</strong> A price change causes little change in demand. Customers are not price-sensitive. Example: insulin for diabetics, basic utilities.</li>
+        <li><strong>Unitary Elastic (|e| = 1):</strong> A 1% price change leads to a 1% change in demand.</li>
+      </ul>
+      <strong>Why it matters:</strong> If demand is inelastic, you can raise prices to increase revenue. If elastic, raising prices will reduce revenue. Firms must know their elasticity before changing prices.
+    </div>
+  </div>
+
+  <!-- Topic 7 -->
+  <div class="card-label" style="font-size:13px; margin:24px 0 12px; color:#0e7490">■ TOPIC 7 — Promotion & Communications Mix</div>
+
+  <div class="qa-item">
+    <div class="qa-question" onclick="toggleQA(this)">
+      <div class="qa-q-num">Q19</div>
+      <div class="qa-q-text">What are the five tools of the Marketing Communications Mix? Explain each briefly.</div>
+      <div class="qa-chevron">▾</div>
+    </div>
+    <div class="qa-answer">
+      <ul>
+        <li><strong>Advertising:</strong> Any paid form of non-personal presentation and promotion of ideas, goods, or services by an identified sponsor. Examples: TV ads, billboards, online banner ads. Reaches large audiences but is one-directional.</li>
+        <li><strong>Sales Promotion:</strong> Short-term incentives to encourage purchase or trial of a product. Examples: coupons, free samples, buy-one-get-one, contests, loyalty points.</li>
+        <li><strong>Public Relations (PR):</strong> Building good relations with various publics through favourable publicity, building a good corporate image, and handling unfavourable events. Examples: press releases, sponsorships, events.</li>
+        <li><strong>Personal Selling:</strong> Personal customer presentations by the firm's sales force for the purpose of making sales and building customer relationships. Most effective but most expensive per contact.</li>
+        <li><strong>Direct Marketing:</strong> Connecting directly with carefully targeted individual consumers — phone, mail, email, online. Examples: email campaigns, direct mail catalogues, SMS marketing.</li>
+      </ul>
+    </div>
+  </div>
+
+  <div class="qa-item">
+    <div class="qa-question" onclick="toggleQA(this)">
+      <div class="qa-q-num">Q20</div>
+      <div class="qa-q-text">Describe the four methods used to set the advertising budget.</div>
+      <div class="qa-chevron">▾</div>
+    </div>
+    <div class="qa-answer">
+      <ul>
+        <li><strong>Affordable Method:</strong> Set the budget at what management thinks the company can afford after all other expenses. Problem: ignores effect of advertising on sales and may underfund during growth periods.</li>
+        <li><strong>Percentage-of-Sales Method:</strong> Set budget as a fixed percentage of current or forecasted sales. Simple and creates relationship between ad spending and performance. Problem: treats advertising as a result of sales rather than a cause.</li>
+        <li><strong>Competitive Parity Method:</strong> Match competitors' advertising spending. Uses industry benchmarks. Prevents advertising wars. Problem: assumes competitors' budgets are correct for your situation.</li>
+        <li><strong>Objective-and-Task Method:</strong> Most logical method. Define specific objectives, determine tasks needed to achieve them, and estimate the cost. Budget = cost of all tasks needed. Problem: requires knowing what tasks are needed and their cost.</li>
+      </ul>
+    </div>
+  </div>
+
+  <div class="qa-item">
+    <div class="qa-question" onclick="toggleQA(this)">
+      <div class="qa-q-num">Q21</div>
+      <div class="qa-q-text">What is Integrated Marketing Communications (IMC) and why is it important?</div>
+      <div class="qa-chevron">▾</div>
+    </div>
+    <div class="qa-answer">
+      <strong>Integrated Marketing Communications (IMC)</strong> is the concept under which a company carefully integrates and coordinates its many communications channels to deliver a clear, consistent, and compelling message about the organisation and its products.<br><br>
+      <strong>Why IMC matters:</strong>
+      <ul>
+        <li>Customers receive messages from many sources — TV, social media, salespeople, packaging. IMC ensures they all say the same thing.</li>
+        <li>Inconsistent messages create confusion and damage brand credibility.</li>
+        <li>IMC maximises communication impact through synergy — the total effect is greater than individual parts.</li>
+        <li>Helps build stronger brand identity and trust.</li>
+        <li>More cost-effective when all tools work together toward the same objectives.</li>
+      </ul>
+      <strong>Example:</strong> A Coca-Cola Christmas campaign uses TV ads, billboards, social media, in-store promotions, and packaging all featuring the same theme and message.
+    </div>
+  </div>
+
+  <!-- Topic 8 -->
+  <div class="card-label" style="font-size:13px; margin:24px 0 12px; color:#be123c">■ TOPIC 8 — Managing the Sales Force</div>
+
+  <div class="qa-item">
+    <div class="qa-question" onclick="toggleQA(this)">
+      <div class="qa-q-num">Q22</div>
+      <div class="qa-q-text">What are the main structures used to organise a sales force?</div>
+      <div class="qa-chevron">▾</div>
+    </div>
+    <div class="qa-answer">
+      <ul>
+        <li><strong>Territorial Sales Force Structure:</strong> Each sales rep is assigned an exclusive geographic area and sells the company's full product line in that territory. Simple, defines rep's responsibilities clearly, and reduces travel costs.</li>
+        <li><strong>Product Sales Force Structure:</strong> Sales force is organised along product lines. Used when products are technically complex or numerous. Disadvantage: multiple reps visiting same customer.</li>
+        <li><strong>Customer (Market) Sales Force Structure:</strong> Organised by type of customer or industry. Allows reps to develop deep customer knowledge. Example: Separate teams for government, corporate, and small business clients.</li>
+        <li><strong>Complex/Combination Structure:</strong> Combines two or more of the above structures. Used by large companies selling many products to many types of customers across many regions.</li>
+      </ul>
+      <strong>Size:</strong> Determined by the workload approach — number of accounts × call frequency × call duration.
+    </div>
+  </div>
+
+  <div class="qa-item">
+    <div class="qa-question" onclick="toggleQA(this)">
+      <div class="qa-q-num">Q23</div>
+      <div class="qa-q-text">What methods can companies use to motivate their sales force?</div>
+      <div class="qa-chevron">▾</div>
+    </div>
+    <div class="qa-answer">
+      <strong>Financial Motivators:</strong>
+      <ul>
+        <li>Straight salary — stable income, low motivation to sell more</li>
+        <li>Straight commission — high motivation but unstable income</li>
+        <li>Salary plus commission — most common combination</li>
+        <li>Bonuses for reaching quotas or exceeding targets</li>
+        <li>Benefits: car allowance, health insurance, expense accounts</li>
+      </ul>
+      <strong>Non-Financial Motivators:</strong>
+      <ul>
+        <li>Recognition — "Salesperson of the Month" awards, public acknowledgement</li>
+        <li>Career development — promotions, training opportunities</li>
+        <li>Sales contests — create excitement and friendly competition</li>
+        <li>Autonomy — allowing reps to manage their own territories</li>
+        <li>Clear, fair, and challenging quotas — a sense of achievement when met</li>
+      </ul>
+    </div>
+  </div>
+
+  <div class="qa-item">
+    <div class="qa-question" onclick="toggleQA(this)">
+      <div class="qa-q-num">Q24</div>
+      <div class="qa-q-text">Explain the 7-step personal selling process.</div>
+      <div class="qa-chevron">▾</div>
+    </div>
+    <div class="qa-answer">
+      <ul>
+        <li><strong>1. Prospecting & Qualifying:</strong> Identify potential customers (prospects) and assess whether they have a need, ability to pay, and authority to buy.</li>
+        <li><strong>2. Pre-approach:</strong> Learn as much as possible about the prospect before the meeting — their needs, buying process, and key decision-makers.</li>
+        <li><strong>3. Approach:</strong> Make the first contact with the customer. Create a good first impression. Open with a question or demonstration to capture interest.</li>
+        <li><strong>4. Presentation & Demonstration:</strong> Tell the product's story to the buyer — features, advantages, and benefits. Show how the product solves the buyer's problem.</li>
+        <li><strong>5. Handling Objections:</strong> Seek out, clarify, and overcome customer objections. Use a positive, logical approach. View objections as opportunities to provide more information.</li>
+        <li><strong>6. Closing:</strong> Ask for the order. Look for closing signals — customer asks about delivery or price. Use techniques: trial close, assumptive close, urgency close.</li>
+        <li><strong>7. Follow-up:</strong> Follow up after the sale to ensure customer satisfaction and repeat business. Resolve any issues promptly.</li>
+      </ul>
+    </div>
+  </div>
+
+  <!-- Topic 9 -->
+  <div class="card-label" style="font-size:13px; margin:24px 0 12px; color:#065f46">■ TOPIC 9 — Dealing with Competition</div>
+
+  <div class="qa-item">
+    <div class="qa-question" onclick="toggleQA(this)">
+      <div class="qa-q-num">Q25</div>
+      <div class="qa-q-text">Distinguish between the industry concept and the market concept of competition.</div>
+      <div class="qa-chevron">▾</div>
+    </div>
+    <div class="qa-answer">
+      <strong>Industry Concept of Competition:</strong>
+      <ul>
+        <li>A group of firms that offer a product or class of products that are close substitutes for each other</li>
+        <li>Narrow view — focuses only on direct competitors in the same industry</li>
+        <li>Example: Zambia Breweries might only view other beer producers as competitors</li>
+        <li>Risk: Leads to marketing myopia — you miss broader competitive threats</li>
+      </ul>
+      <strong>Market Concept of Competition:</strong>
+      <ul>
+        <li>All companies that compete for the same customer need or money</li>
+        <li>Broader, more customer-focused view of who competes with you</li>
+        <li>Example: Zambia Breweries also competes with soft drink makers, water brands, juice companies — all vying for the same customer's entertainment/refreshment budget</li>
+        <li>Advantage: Spots threats early and reveals new opportunities</li>
+      </ul>
+    </div>
+  </div>
+
+  <div class="qa-item">
+    <div class="qa-question" onclick="toggleQA(this)">
+      <div class="qa-q-num">Q26</div>
+      <div class="qa-q-text">Explain Porter's Five Forces model and its use in competitive analysis.</div>
+      <div class="qa-chevron">▾</div>
+    </div>
+    <div class="qa-answer">
+      Porter's Five Forces is a framework for analysing the competitive environment of an industry and determining its profitability potential:<br><br>
+      <ul>
+        <li><strong>1. Rivalry Among Existing Competitors:</strong> Intensity of competition. High when many similar competitors, slow growth, high fixed costs. Forces prices down and profit margins thin.</li>
+        <li><strong>2. Threat of New Entrants:</strong> New companies can enter and take market share. Reduced by barriers to entry — patents, capital requirements, brand loyalty, government regulations.</li>
+        <li><strong>3. Threat of Substitute Products:</strong> Alternative products that meet the same customer need. High substitutes = buyers have more options = lower pricing power for the firm.</li>
+        <li><strong>4. Bargaining Power of Buyers:</strong> Customers' ability to drive prices down. High when few large buyers, standard products, or buyers can easily switch.</li>
+        <li><strong>5. Bargaining Power of Suppliers:</strong> Suppliers' ability to drive input prices up. High when few suppliers, unique inputs, or switching costs are high.</li>
+      </ul>
+      <strong>Use:</strong> Helps companies identify which forces threaten profitability and develop strategies to protect or improve their position.
+    </div>
+  </div>
+
+  <div class="qa-item">
+    <div class="qa-question" onclick="toggleQA(this)">
+      <div class="qa-q-num">Q27</div>
+      <div class="qa-q-text">What are Porter's three generic competitive strategies?</div>
+      <div class="qa-chevron">▾</div>
+    </div>
+    <div class="qa-answer">
+      <ul>
+        <li><strong>Cost Leadership:</strong> Achieve the lowest cost of production in the industry while maintaining acceptable quality and profit margins. Sell at market price but with higher margins, OR undercut competitors. Example: Walmart, Shoprite. Requires: tight cost controls, efficient processes, economies of scale.</li>
+        <li><strong>Differentiation:</strong> Offer something unique that customers value and will pay a premium for. Could be product features, brand image, quality, technology, or service. Example: Apple, BMW. Requires: strong R&amp;D, creativity, strong marketing, customer loyalty.</li>
+        <li><strong>Focus (Niche):</strong> Concentrate on a narrow target segment and serve it better than anyone else — either through low cost or differentiation within that niche. Example: Rolls-Royce (luxury niche), a local organic bakery. Requires: deep understanding of the niche segment's needs.</li>
+      </ul>
+      <strong>Warning:</strong> Being "stuck in the middle" — trying to be everything to everyone — usually leads to failure.
+    </div>
+  </div>
+
+  <div class="qa-item">
+    <div class="qa-question" onclick="toggleQA(this)">
+      <div class="qa-q-num">Q28</div>
+      <div class="qa-q-text">What are the four competitive positions in a market and what strategy should each adopt?</div>
+      <div class="qa-chevron">▾</div>
+    </div>
+    <div class="qa-answer">
+      <ul>
+        <li><strong>Market Leader (largest share):</strong> Expand total market, protect current market share (defensive strategies), and expand market share. Example: Coca-Cola in soft drinks.</li>
+        <li><strong>Market Challenger (#2 or #3):</strong> Aggressively attack the market leader or other rivals to gain market share. Strategies: frontal attack (compete directly), flanking attack (attack weaknesses), guerrilla attack. Example: Pepsi vs Coca-Cola.</li>
+        <li><strong>Market Follower:</strong> Copy the leader, avoiding risky confrontation. Maintain current customers, grow through acquisition of smaller rivals. Lower risk, lower reward. Example: Many regional beverage brands.</li>
+        <li><strong>Market Nicher:</strong> Serve one or more small segments the large players ignore. Achieve high margins by specialising deeply. Risk: segment may disappear or attract larger competitors. Example: specialty bookshops, artisan food producers.</li>
+      </ul>
+    </div>
+  </div>
+
+  <!-- BONUS GENERAL QUESTIONS -->
+  <div class="card-label" style="font-size:13px; margin:24px 0 12px; color:#0d0d0d">■ BONUS — Cross-Topic Application Questions</div>
+
+  <div class="qa-item">
+    <div class="qa-question" onclick="toggleQA(this)">
+      <div class="qa-q-num">Q29</div>
+      <div class="qa-q-text">A company is launching a new energy drink in Zambia. Walk through how they would apply the marketing mix (4 Ps).</div>
+      <div class="qa-chevron">▾</div>
+    </div>
+    <div class="qa-answer">
+      <strong>Product:</strong> Design a high-energy drink with a distinctive taste, appealing packaging, and a strong brand name (e.g., "Zamba Energy"). Include augmented features like a loyalty programme. Product should target young professionals and students aged 18–35.<br><br>
+      <strong>Price:</strong> Use penetration pricing initially (e.g., K15 per can) to gain market share. Once established and brand equity builds, gradually increase price. Offer multi-pack discounts to encourage trial.<br><br>
+      <strong>Place:</strong> Distribute through supermarkets (Shoprite, Pick n Pay), fuel stations, gyms, university campuses, and sports events. Prioritise Lusaka and Copperbelt first, then expand nationally.<br><br>
+      <strong>Promotion:</strong> Launch with social media campaign (Instagram, TikTok), partner with Zambian sports influencers and athletes, sponsor local football matches, in-store sampling, and radio ads on stations popular with youth. Use IMC to ensure consistent messaging across all channels.
+    </div>
+  </div>
+
+  <div class="qa-item">
+    <div class="qa-question" onclick="toggleQA(this)">
+      <div class="qa-q-num">Q30</div>
+      <div class="qa-q-text">How has the rise of digital technology changed marketing practices? Give examples.</div>
+      <div class="qa-chevron">▾</div>
+    </div>
+    <div class="qa-answer">
+      Digital technology has fundamentally transformed marketing in several key ways:<br><br>
+      <ul>
+        <li><strong>From mass to personalised marketing:</strong> Big data allows companies to send individualised messages based on browsing history, purchase behaviour, and demographics. Example: Amazon's product recommendations.</li>
+        <li><strong>Two-way communication:</strong> Social media enables customers to respond, share, and co-create content. Companies can engage in real-time conversations. Example: Brands responding to customer tweets.</li>
+        <li><strong>Measurability:</strong> Digital marketing provides precise metrics — clicks, conversion rates, cost per acquisition. Traditional advertising couldn't measure impact this precisely.</li>
+        <li><strong>Lower barriers for small businesses:</strong> Small businesses in Zambia can compete nationally using Facebook Ads, WhatsApp Business, and Instagram at low cost.</li>
+        <li><strong>E-commerce:</strong> Online stores have disrupted traditional retail. Consumers can buy from anywhere at any time.</li>
+        <li><strong>Influencer marketing:</strong> Social media influencers have replaced traditional celebrity endorsements for reaching niche audiences cost-effectively.</li>
+        <li><strong>Mobile-first:</strong> Marketing must be optimised for mobile devices, particularly in Africa where mobile penetration exceeds desktop usage.</li>
+      </ul>
+    </div>
+  </div>
+
+</div><!-- end qa panel -->
+
+</main>
+
+<script>
+function showPanel(id) {
+  document.querySelectorAll('.section-panel').forEach(p => p.classList.remove('active'));
+  document.querySelectorAll('.tab').forEach(t => t.classList.remove('active'));
+  document.getElementById(id).classList.add('active');
+  event.target.classList.add('active');
+  window.scrollTo({top: 0, behavior: 'smooth'});
+}
+
+function toggleQA(el) {
+  const item = el.closest('.qa-item');
+  item.classList.toggle('open');
+}
+</script>
+</body>
+</html>
